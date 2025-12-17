@@ -22,9 +22,9 @@
 <body class="bg-slate-50 text-slate-800 font-sans flex flex-col min-h-screen">
 
     <div class="bg-slate-900 text-white p-4 shadow-lg z-50">
-        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="flex-1 text-center md:text-left">
-                <h1 class="text-xl md:text-2xl font-bold tracking-tight">Math Mastery Tracker</h1>
+                <h1 class="text-xl md:text-3xl font-bold tracking-tight">Math Mastery Tracker</h1>
                 <p class="text-slate-400 text-xs md:text-sm">Grade 9 Curriculum (Quebec)</p>
             </div>
 
@@ -71,7 +71,7 @@
     </div>
 
     <div class="bg-white border-b border-slate-200 sticky top-0 z-40">
-        <div class="max-w-5xl mx-auto flex">
+        <div class="max-w-6xl mx-auto flex">
             <button onclick="switchTab('tracker')" id="btn-tracker" class="tab-btn flex-1 py-4 text-center font-bold text-slate-600 border-b-2 border-transparent hover:text-blue-600 hover:bg-slate-50">
                 📊 Mastery Tracker
             </button>
@@ -81,11 +81,11 @@
         </div>
     </div>
 
-    <div class="max-w-5xl mx-auto w-full flex-1 p-6">
+    <div class="max-w-6xl mx-auto w-full flex-1 p-4 md:p-6">
         
         <div id="tab-tracker" class="block">
             <div class="flex flex-col md:flex-row gap-4 mb-8 sticky top-20 z-30 bg-slate-50 py-4 border-b border-slate-200">
-                <input type="text" id="search-input" placeholder="Search skills (e.g., 'slope', 'sphere')..." 
+                <input type="text" id="search-input" placeholder="Search skills (e.g., 'slope', 'sphere', 'inequality')..." 
                        class="flex-1 p-3 border border-slate-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 outline-none">
                 <button onclick="resetProgress()" class="px-6 py-3 text-sm font-medium text-red-600 bg-white border border-red-200 rounded-lg hover:bg-red-50 transition">Reset</button>
             </div>
@@ -106,7 +106,7 @@
     </div>
 
     <script>
-    // --- 1. DATASET ---
+    // --- 1. FULL DATASET ---
     const curriculumData = [
         {
             category: "Arithmetic | Real Numbers",
@@ -116,13 +116,13 @@
                     skills: [
                         { level: "Mild", text: "I can define the real number system as the combination of rational and irrational numbers." },
                         { level: "Mild", text: "I can link the real number system to the number line." },
-                        { level: "Medium", text: "I can categorize numbers as rational or irrational." },
+                        { level: "Medium", text: "I can categorize a real number as either rational or irrational." },
                         { level: "Spicy", text: "I can convert repeating decimals to fractions." },
-                        { level: "Spicy", text: "I can represent real numbers (and its subsets) using set builder symbols and notations." }
+                        { level: "Spicy", text: "I can represent real numbers (and subsets) using set builder notation." }
                     ]
                 },
                 {
-                    title: "Interval Notation & Inequalities",
+                    title: "Interval Notation",
                     skills: [
                         { level: "Mild", text: "I can represent a simple inequality verbally, algebraically, numerically, and graphically." },
                         { level: "Medium", text: "I can represent a compound inequality (AND) verbally, algebraically, numerically, and graphically." },
@@ -133,50 +133,63 @@
                     title: "Cubes & Cube Roots",
                     skills: [
                         { level: "Mild", text: "I can identify perfect cubes (and cube roots)." },
-                        { level: "Medium", text: "I can link cubed numbers and their cube root to different situations (e.g., side length vs volume)." }
+                        { level: "Medium", text: "I can link cubed numbers and cube roots to different contexts (e.g. side length vs volume)." }
                     ]
                 },
                 {
-                    title: "Exponents",
+                    title: "Fractional Exponents",
                     skills: [
                         { level: "Mild", text: "I understand that a fractional exponent represents both a power (numerator) and a root (denominator)." },
                         { level: "Medium", text: "I can evaluate a power with a fractional exponent." },
                         { level: "Medium", text: "I can convert a root to a fractional exponent." },
-                        { level: "Spicy", text: "I can perform operations with exponents with fractional exponents." },
-                        { level: "Mild", text: "I understand that negative exponents represent repeated division." },
-                        { level: "Mild", text: "I can rewrite a negative exponent as a positive exponent." },
+                        { level: "Spicy", text: "I can simplify expressions with exponents with fractional exponents." }
+                    ]
+                },
+                {
+                    title: "Negative Exponents",
+                    skills: [
+                        { level: "Mild", text: "I understand negative exponents represent repeated division." },
+                        { level: "Mild", text: "I can rewrite a negative exponent as a positive exponent using division." },
                         { level: "Medium", text: "I can combine positive and negative exponents for like bases." }
                     ]
                 },
                 {
-                    title: "Operations with Exponents",
+                    title: "Operations Involving Exponents",
                     skills: [
                         { level: "Mild", text: "I can perform operations with exponents with whole number bases and whole number exponents." },
-                        { level: "Medium", text: "I can perform operations with exponents with integer bases and whole number exponents." },
-                        { level: "Spicy", text: "I can perform operations with exponents with fractional bases and whole number exponents." },
-                        { level: "Spicy", text: "I can perform operations with exponents with integer bases and fractional exponents." },
-                        { level: "Extra Spicy", text: "I can perform operations with exponents with fractional bases and fractional exponents." }
+                        { level: "Medium", text: "I can perform operations with exponents with positive and negative (integer) bases and whole number exponents." },
+                        { level: "Spicy", text: "I can perform operations with exponents with positive and negative fractional (rational) bases and whole number exponents." },
+                        { level: "Spicy", text: "I can perform operations with exponents with positive and negative (integer) bases and fractional (rational) number exponents." },
+                        { level: "Extra Spicy", text: "I can perform operations with exponents with positive and negative fractional (rational) bases and fractional (rational) number exponents." }
                     ]
                 },
                 {
                     title: "Exponent Laws",
                     skills: [
-                        { level: "Mild", text: "I can list the exponent laws (Product, Quotient, Power of Product/Quotient, Power of Power)." },
+                        { level: "Mild", text: "I understand that exponents represents repeated multiplication." },
                         { level: "Mild", text: "I understand special exponents (Power of 0 is 1; Exponent 1 changes nothing)." },
-                        { level: "Mild", text: "I can simplify an expression using a single exponent law." },
-                        { level: "Medium", text: "I can simplify an expression using two or more different exponent laws." },
+                        { level: "Mild", text: "I can collect like terms." },
+                        { level: "Mild", text: "I can list the exponent laws (Product, Quotient, Power of Product/Quotient, Power of a Power)." },
+                        { level: "Mild", text: "I can simplify an expression using a single exponent law for numerical and algebraic bases." },
                         { level: "Medium", text: "I can justify the exponent laws." },
-                        { level: "Spicy", text: "I can apply exponent laws combined with Geometry and dividing fractions." }
+                        { level: "Medium", text: "I can simplify an expression using two or more exponent laws." },
+                        { level: "Medium", text: "I can rewrite an exponential expression using only positive exponents." },
+                        { level: "Spicy", text: "I can apply exponents laws combined with Geometry (area/Pythagorean) and dividing fractions." }
                     ]
                 },
                 {
-                    title: "Scientific Notation & Magnitude",
+                    title: "Scientific Notation",
                     skills: [
-                        { level: "Mild", text: "I can convert numbers to/from scientific notation." },
+                        { level: "Mild", text: "I can convert numbers to and from scientific notation." },
                         { level: "Medium", text: "I can perform operations with numbers in scientific notation." },
-                        { level: "Spicy", text: "I can solve word problems involving scientific notation." },
-                        { level: "Mild", text: "I can associate orders of magnitude with metric prefixes and place value." },
-                        { level: "Medium", text: "I can estimate order of magnitude using metric prefix or place value." },
+                        { level: "Spicy", text: "I can solve word problems that require converting and/or performing operations in scientific notation." }
+                    ]
+                },
+                {
+                    title: "Order of Magnitude",
+                    skills: [
+                        { level: "Mild", text: "I can associate orders of magnitude with both metric prefixes and place value." },
+                        { level: "Medium", text: "I can estimate the order of magnitude using either the metric prefix or the place value." },
                         { level: "Spicy", text: "I can compare two or more things using their relative orders of magnitude." }
                     ]
                 }
@@ -186,22 +199,27 @@
             category: "Algebra | Expressions",
             topics: [
                 {
-                    title: "Polynomial Operations",
+                    title: "Multiplying Polynomials",
                     skills: [
-                        { level: "Mild", text: "I can multiply a monomial by a polynomial." },
+                        { level: "Mild", text: "I can multiply a monomial by a polynomial (with one or more variables)." },
                         { level: "Medium", text: "I can multiply two binomials." },
                         { level: "Spicy", text: "I can multiply a binomial by a trinomial." },
                         { level: "Spicy", text: "I can square a binomial." },
                         { level: "Spicy", text: "I can use algebraic identities." },
-                        { level: "Extra Spicy", text: "I can multiply polynomials with three or more terms." },
-                        { level: "Mild", text: "I can divide a polynomial by a constant." },
-                        { level: "Medium", text: "I can divide a polynomial by a monomial (without constant/variable clash)." },
-                        { level: "Spicy", text: "I can use division in context to solve problems (finding missing measures)." },
-                        { level: "Extra Spicy", text: "I can divide a polynomial by a binomial (factoring/long division)." }
+                        { level: "Extra Spicy", text: "I can multiply polynomials with three or more terms by other polynomials with three or more terms." }
                     ]
                 },
                 {
-                    title: "Factoring",
+                    title: "Dividing a Polynomial by a Monomial",
+                    skills: [
+                        { level: "Mild", text: "I can divide a polynomial by a constant." },
+                        { level: "Medium", text: "I can divide a polynomial by a monomial." },
+                        { level: "Spicy", text: "I can use division in context to solve problems (e.g. algebraic geometry)." },
+                        { level: "Extra Spicy", text: "I can divide a polynomial by a binomial by either factoring or using long division." }
+                    ]
+                },
+                {
+                    title: "Factoring Polynomials",
                     skills: [
                         { level: "Mild", text: "I can identify the numerical and algebraic greatest common factor (GCF)." },
                         { level: "Medium", text: "I can completely factor out a polynomial by a monomial." },
@@ -212,27 +230,38 @@
             ]
         },
         {
-            category: "Algebra | Equations",
+            category: "Algebra | Equations & Inequalities",
             topics: [
                 {
                     title: "Solving Equations",
                     skills: [
                         { level: "Mild", text: "I can solve a one-step equation." },
                         { level: "Medium", text: "I can solve a two-step equation." },
-                        { level: "Spicy", text: "I can solve a multi-step equation." },
+                        { level: "Spicy", text: "I can solve a multi-step equation." }
+                    ]
+                },
+                {
+                    title: "Solving Fractional Equations",
+                    skills: [
                         { level: "Mild", text: "I can solve an equation which includes a fraction." },
-                        { level: "Medium", text: "I can solve an equation with a fraction on both sides." },
-                        { level: "Spicy", text: "I can solve an equation requiring a common denominator." }
+                        { level: "Medium", text: "I can solve an equation which has fractions on both sides." },
+                        { level: "Spicy", text: "I can solve an equation where I need to find a common denominator." }
                     ]
                 },
                 {
                     title: "Inequalities",
                     skills: [
-                        { level: "Mild", text: "I can identify greater/smaller expressions and strict vs inclusive inequalities." },
-                        { level: "Medium", text: "I can translate a written description to an inequality with a variable." },
-                        { level: "Mild", text: "I can solve an equation with an inequality." },
-                        { level: "Medium", text: "I can identify when to flip the inequality sign (multiplying/dividing by negative)." },
-                        { level: "Spicy", text: "I can represent solutions using Interval Notation." }
+                        { level: "Mild", text: "I can recognize an inequality and identify greater/smaller expressions based on symbols." },
+                        { level: "Mild", text: "I understand the difference between strict and inclusive inequalities." },
+                        { level: "Medium", text: "I can translate a written description to a single variable inequality." }
+                    ]
+                },
+                {
+                    title: "Solving First Degree Inequalities",
+                    skills: [
+                        { level: "Mild", text: "I can solve an inequality using inverse operations." },
+                        { level: "Medium", text: "I can identify situations where multiplying/dividing by a negative flips the inequality." },
+                        { level: "Spicy", text: "I can solve compound inequalities." }
                     ]
                 }
             ]
@@ -241,55 +270,88 @@
             category: "Algebra | Relations",
             topics: [
                 {
-                    title: "Functions & Slope",
+                    title: "Relations & Functions",
                     skills: [
-                        { level: "Mild", text: "I can identify independent/dependent variables and define a function." },
+                        { level: "Mild", text: "I can identify independent/dependent variables and define relation vs function." },
                         { level: "Medium", text: "I can identify if a relation is a function." },
-                        { level: "Medium", text: "I can identify properties: Domain, Range, Extrema, Intercepts." },
-                        { level: "Spicy", text: "I can sketch a context on a graph connecting to function properties." },
-                        { level: "Mild", text: "I can calculate slope (rate of change) from a graph or equation." },
-                        { level: "Medium", text: "I can calculate slope between two points using the formula." },
-                        { level: "Medium", text: "I can calculate slope from a table or word problem." }
+                        { level: "Medium", text: "I can identify properties: Domain, Range, Increase/Decrease, Sign, Extrema, Intercepts." },
+                        { level: "Spicy", text: "I can construct a context given properties or sketch a graph from properties." }
                     ]
                 },
                 {
-                    title: "Linear Functions",
+                    title: "Modes of Representation",
                     skills: [
-                        { level: "Mild", text: "I can calculate output given a rule." },
-                        { level: "Medium", text: "I understand y=mx+b and can solve for input or output." },
-                        { level: "Medium", text: "I can write a rule given a rate and initial value." },
-                        { level: "Spicy", text: "I can determine the rule (y=mx+b) from a table, graph, or two points." },
-                        { level: "Spicy", text: "I can write a rule to model a situational problem." }
+                        { level: "Mild", text: "I can identify different modes of representing a relation (verbal, algebraic, table, graph)." },
+                        { level: "Medium", text: "I can convert between representations and interpret situations." },
+                        { level: "Spicy", text: "I can model a real world situation using one or more modes of representation." }
                     ]
                 },
                 {
-                    title: "Variations (Direct, Indirect, Inverse)",
+                    title: "Slope",
+                    skills: [
+                        { level: "Mild", text: "I can calculate rate of change from a graph or equation." },
+                        { level: "Medium", text: "I can calculate rate of change between two points using the formula." },
+                        { level: "Medium", text: "I can calculate rate of change given a table or word problem." }
+                    ]
+                },
+                {
+                    title: "Rule of a Linear Function",
+                    skills: [
+                        { level: "Mild", text: "I can identify input/output variables and calculate output given a rule." },
+                        { level: "Medium", text: "I understand y=mx+b form and can solve for input or output variables." },
+                        { level: "Medium", text: "I can write a simple linear rule given a rate and initial value." },
+                        { level: "Spicy", text: "I can determine the rule (y=mx+b) from a table, graph, or two points." },
+                        { level: "Spicy", text: "I can write a rule to model a situational problem and use it to solve the problem." }
+                    ]
+                },
+                {
+                    title: "Constant, Direct, Indirect Variation",
                     skills: [
                         { level: "Mild", text: "I can recognize constant, direct, and indirect variation situations." },
-                        { level: "Medium", text: "I can identify direct (y=kx) and indirect/inverse (xy=k) variations." },
+                        { level: "Medium", text: "I can identify direct (y=kx) and indirect (xy=k) variations." },
                         { level: "Medium", text: "I can determine the constant of variation (k) and write the rule." },
-                        { level: "Spicy", text: "I can graph variations (lines vs hyperbolas) and solve situational problems." },
-                        { level: "Medium", text: "I can calculate a missing variable in an inverse variation given k." },
-                        { level: "Spicy", text: "I can explain asymptotes and impossible values (e.g. x=0) in inverse variation." }
+                        { level: "Spicy", text: "I can differentiate variations from tables/graphs and solve problems." },
+                        { level: "Spicy", text: "I can graph direct/indirect variations and translate situational problems into models." }
                     ]
                 },
                 {
-                    title: "Inverse Functions",
+                    title: "Models a Linear Function",
                     skills: [
-                        { level: "Mild", text: "I understand an inverse undoes a relationship (swapping x and y)." },
-                        { level: "Medium", text: "I can find the inverse rule algebraically and understand the reflection across y=x." },
-                        { level: "Spicy", text: "I can determine the domain and range of an inverse function." }
+                        { level: "Mild", text: "I can identify dependent/independent variables and start/rate in simple situations." },
+                        { level: "Medium", text: "I can identify initial value (b) and rate (m) to write y=mx+b rule." },
+                        { level: "Spicy", text: "I can create a linear model from a problem requiring rate calculation from data points." },
+                        { level: "Spicy", text: "I can interpret slope and y-intercept in context and determine domain/range." }
+                    ]
+                },
+                {
+                    title: "Inverse Variation (Rational)",
+                    skills: [
+                        { level: "Mild", text: "I can recognize inverse relationships and complete simple tables (constant product)." },
+                        { level: "Medium", text: "I can identify inverse variation from a table, find k, and write the rule (y=k/x)." },
+                        { level: "Spicy", text: "I can model situational problems and recognize the hyperbola graph/asymptotes." },
+                        { level: "Spicy", text: "I can explain impossible values (e.g., x=0)." },
+                        { level: "Extra Spicy", text: "I can compare inverse variation with other relationships and explore asymptotes formally." }
+                    ]
+                },
+                {
+                    title: "Inverse of a Function",
+                    skills: [
+                        { level: "Mild", text: "I understand an inverse 'undoes' a relationship and can swap table values." },
+                        { level: "Medium", text: "I can find the inverse rule algebraically and understand the graph reflection (y=x)." },
+                        { level: "Spicy", text: "I can find inverse rules from different forms and interpret meaning in context." },
+                        { level: "Spicy", text: "I can determine domain and range of an inverse function." }
                     ]
                 },
                 {
                     title: "Systems of Equations",
                     skills: [
-                        { level: "Mild", text: "I can recognize when a situation requires a system of equations." },
+                        { level: "Mild", text: "I can recognize when a situation can be represented by a system of equations." },
                         { level: "Medium", text: "I can represent a system using tables, graphs, or equations." },
-                        { level: "Medium", text: "I can interpret the point of intersection." },
+                        { level: "Medium", text: "I can interpret the solution (point of intersection)." },
+                        { level: "Spicy", text: "I can represent a system with more than two equations." },
                         { level: "Mild", text: "I can solve a system using a table or graph." },
                         { level: "Medium", text: "I can solve a system algebraically using comparison." },
-                        { level: "Spicy", text: "I understand solution types: unique, no solution, infinite." }
+                        { level: "Spicy", text: "I understand types of solutions (unique, none, infinite) and can solve using substitution/elimination." }
                     ]
                 }
             ]
@@ -298,54 +360,75 @@
             category: "Geometry",
             topics: [
                 {
-                    title: "Surface Area",
+                    title: "Surface Area of Cones",
                     skills: [
-                        { level: "Mild", text: "I can calculate surface area of cones (Base + Lateral)." },
-                        { level: "Medium", text: "I can use formulas for cone Area (πr²) and Lateral Area (πrs)." },
-                        { level: "Mild", text: "I can calculate surface area of spheres (SA=4πr²)." },
-                        { level: "Medium", text: "I can find radius from diameter and calculate SA for spheres/hemispheres." },
+                        { level: "Mild", text: "I can identify radius, height, slant height and calculate base/lateral area." },
+                        { level: "Medium", text: "I can use Pythagorean theorem to find dimensions and use formulas for area." }
+                    ]
+                },
+                {
+                    title: "Surface Area of Spheres",
+                    skills: [
+                        { level: "Mild", text: "I can identify radius/diameter and calculate surface area (SA=4πr²)." },
+                        { level: "Medium", text: "I can find radius from diameter, calculate hemisphere SA, and work backwards." },
                         { level: "Spicy", text: "I can solve multi-step problems involving spheres and analyze radius changes." }
                     ]
                 },
                 {
-                    title: "Volume & Decomposable Solids",
+                    title: "Decomposable Solids",
                     skills: [
-                        { level: "Mild", text: "I can identify basic solids in a decomposable object and add volumes." },
-                        { level: "Medium", text: "I can decompose solids and calculate total volume." },
-                        { level: "Spicy", text: "I can solve volume problems requiring Pythagorean theorem or cavities (subtraction)." },
-                        { level: "Mild", text: "I can identify cylinders, cones, spheres and recall volume formulas." },
-                        { level: "Medium", text: "I can calculate volume given dimensions or work backwards to find dimensions." },
-                        { level: "Spicy", text: "I can solve multi-step word problems involving volume." }
+                        { level: "Mild", text: "I can identify basic solids and add volumes of simple parts." },
+                        { level: "Medium", text: "I can decompose solids into prisms, cylinders, etc., and sum volumes." },
+                        { level: "Spicy", text: "I can analyze complex solids, handle cavities (negative volume), and solve multi-step problems." }
                     ]
                 },
                 {
-                    title: "Capacity & Projections",
+                    title: "Volume",
+                    skills: [
+                        { level: "Mild", text: "I can identify shapes and recall volume formulas for cylinders, cones, spheres." },
+                        { level: "Medium", text: "I can calculate volumes given dimensions and solve one-step word problems." },
+                        { level: "Medium", text: "I can work backwards to find missing dimensions from volume." },
+                        { level: "Spicy", text: "I can solve multi-step word problems involving these solids." }
+                    ]
+                },
+                {
+                    title: "Capacity",
                     skills: [
                         { level: "Mild", text: "I can identify metric units of volume/capacity and perform simple conversions." },
-                        { level: "Medium", text: "I can convert between cubic meters and liters." },
-                        { level: "Mild", text: "I can draw a net and match it to a shape." },
-                        { level: "Medium", text: "I can interpret perspective drawings and blueprints." },
+                        { level: "Medium", text: "I can convert between cubic meters and liters and apply metric prefixes." }
+                    ]
+                },
+                {
+                    title: "Projections & Perspectives",
+                    skills: [
+                        { level: "Mild", text: "I can draw a net and identify which net goes with which shape." },
+                        { level: "Medium", text: "I can represent objects using perspective drawings and interpret blueprints." },
                         { level: "Spicy", text: "I can draw different views of a solid from a 3D representation." }
                     ]
                 },
                 {
-                    title: "Similar & Equivalent Figures",
+                    title: "Similar Figures & Solids",
                     skills: [
                         { level: "Mild", text: "I can identify similar figures and use scale factor to find missing sides." },
-                        { level: "Medium", text: "I understand the relationship between scale factor (k) and Area (k²) or Volume (k³)." },
-                        { level: "Spicy", text: "I can solve multi-step problems involving similar figures." },
-                        { level: "Mild", text: "I can determine if shapes are equivalent by comparing Area/Volume." },
-                        { level: "Medium", text: "I can find dimensions for equivalent shapes." },
-                        { level: "Spicy", text: "I can apply equivalence to optimization problems." }
+                        { level: "Medium", text: "I understand relationships between scale factor (k) and perimeter (k), area (k²), volume (k³)." },
+                        { level: "Spicy", text: "I can solve multi-step problems involving similar figures and solids." }
+                    ]
+                },
+                {
+                    title: "Equivalent Figures",
+                    skills: [
+                        { level: "Mild", text: "I can determine if shapes are equivalent by comparing volumes or areas." },
+                        { level: "Medium", text: "I can find dimensions for equivalent shapes and apply the concept to practical problems." },
+                        { level: "Spicy", text: "I can solve equivalence problems for complex shapes and optimization problems." }
                     ]
                 },
                 {
                     title: "Pythagorean Theorem",
                     skills: [
-                        { level: "Mild", text: "I can find a missing side using Pythagorean theorem." },
+                        { level: "Mild", text: "I can identify parts of a triangle and find a missing side." },
                         { level: "Medium", text: "I can solve multi-step questions involving composite figures." },
                         { level: "Spicy", text: "I can find a missing leg in an isosceles triangle." },
-                        { level: "Extra Spicy", text: "I can apply principals of 30-60-90 special triangle." }
+                        { level: "Extra Spicy", text: "I can apply 30-60-90 triangle principles and justify calculations." }
                     ]
                 }
             ]
@@ -354,37 +437,85 @@
             category: "Statistics & Probability",
             topics: [
                 {
-                    title: "Data Analysis",
+                    title: "Sampling Methods",
                     skills: [
                         { level: "Mild", text: "I understand census vs sampling." },
                         { level: "Medium", text: "I can identify simple random, stratified, and cluster sampling." },
                         { level: "Spicy", text: "I can suggest sampling methods and identify bias." },
-                        { level: "Extra Spicy", text: "I can analyze sampling reliability and sample size." },
-                        { level: "Mild", text: "I can calculate mean, mode, and median for simple sets." },
-                        { level: "Medium", text: "I can calculate mean/median for decimals and frequency tables." },
-                        { level: "Spicy", text: "I can calculate weighted mean." },
-                        { level: "Medium", text: "I can find Q1, Q3, and Interquartile Range (IQR)." }
+                        { level: "Extra Spicy", text: "I can analyze sampling reliability, evaluate studies, and describe advanced techniques." }
                     ]
                 },
                 {
-                    title: "Representing Data",
+                    title: "Mean",
                     skills: [
-                        { level: "Medium", text: "I can interpret histograms and scatterplots (correlation)." },
-                        { level: "Medium", text: "I can identify outliers or unusual patterns." },
-                        { level: "Mild", text: "I can identify box and whiskers on a plot." },
-                        { level: "Medium", text: "I can identify the 5 key values on a box plot and interpret quartiles." },
-                        { level: "Extra Spicy", text: "I can describe skewness based on a box plot." }
+                        { level: "Mild", text: "I can calculate mean for simple sets." },
+                        { level: "Medium", text: "I can calculate mean for decimals and find missing values." },
+                        { level: "Spicy", text: "I can calculate weighted mean and mean from frequency tables." },
+                        { level: "Extra Spicy", text: "I can analyze when mean is appropriate vs misleading and handle complex weighted means." }
                     ]
                 },
                 {
-                    title: "Probability",
+                    title: "Mode, Median, Range",
+                    skills: [
+                        { level: "Mild", text: "I can find mode, median, and range for simple sets." },
+                        { level: "Medium", text: "I can find mode/median for larger sets and frequency tables." },
+                        { level: "Spicy", text: "I can identify mode from graphs and find median from frequency tables." }
+                    ]
+                },
+                {
+                    title: "Quartiles",
+                    skills: [
+                        { level: "Mild", text: "I understand quartiles and can find Q2 (median)." },
+                        { level: "Medium", text: "I can find Q1, Q3, and Interquartile Range (IQR)." },
+                        { level: "Spicy", text: "I can calculate quartiles for various sets and frequency tables." }
+                    ]
+                },
+                {
+                    title: "Data in Classes",
+                    skills: [
+                        { level: "Mild", text: "I understand grouping data into categories/intervals." },
+                        { level: "Medium", text: "I can identify intervals." },
+                        { level: "Spicy", text: "I can organize raw data into classes and create frequency tables." }
+                    ]
+                },
+                {
+                    title: "Graphically Representing Data",
+                    skills: [
+                        { level: "Mild", text: "I recognize histograms and scatterplots." },
+                        { level: "Medium", text: "I can interpret histograms and scatterplots and plot points." },
+                        { level: "Spicy", text: "I can create histograms, describe distribution shapes, and identify outliers." }
+                    ]
+                },
+                {
+                    title: "Box & Whisker Plots",
+                    skills: [
+                        { level: "Mild", text: "I can recognize box plots and identify box/whiskers." },
+                        { level: "Medium", text: "I can identify 5 key values (min, Q1, med, Q3, max) and interpret sections." },
+                        { level: "Spicy", text: "I can calculate IQR from a plot and construct a plot." },
+                        { level: "Extra Spicy", text: "I can identify outliers, describe skewness, and compare distributions." }
+                    ]
+                },
+                {
+                    title: "Probability Types",
                     skills: [
                         { level: "Mild", text: "I can identify discrete vs continuous variables." },
                         { level: "Medium", text: "I can classify variables and understand probability assignment." },
-                        { level: "Mild", text: "I understand order in arrangements vs combinations." },
-                        { level: "Medium", text: "I can calculate outcomes where duplicates are not allowed." },
-                        { level: "Mild", text: "I understand geometric probability (1D and 2D)." },
-                        { level: "Medium", text: "I can calculate probability based on ratio of lengths or areas." }
+                        { level: "Spicy", text: "I can explain how variable type affects probability calculation." }
+                    ]
+                },
+                {
+                    title: "Arrangements & Combinations",
+                    skills: [
+                        { level: "Mild", text: "I understand order matters in arrangements vs combinations." },
+                        { level: "Medium", text: "I can calculate outcomes with/without replacement." }
+                    ]
+                },
+                {
+                    title: "Geometric Probability",
+                    skills: [
+                        { level: "Mild", text: "I understand probability based on length/area." },
+                        { level: "Medium", text: "I can calculate probability for 1D and 2D regions." },
+                        { level: "Spicy", text: "I can solve multi-step geometric probability problems." }
                     ]
                 }
             ]
@@ -412,7 +543,7 @@
     const spicyProgressDisplay = document.getElementById('spicy-progress');
 
     // Storage keys
-    const PROGRESS_KEY = 'mathMasteryProgressV9';
+    const PROGRESS_KEY = 'mathMasteryProgressFullV1';
     const TAB_KEY = 'mathMasteryActiveTab';
 
     // Load progress
@@ -578,20 +709,16 @@
 
     // --- TAB LOGIC ---
     window.switchTab = function(tabName) {
-        // Save state
         localStorage.setItem(TAB_KEY, tabName);
 
-        // Hide all tabs
         document.getElementById('tab-tracker').classList.add('hidden');
         document.getElementById('tab-docs').classList.add('hidden');
         
-        // Reset buttons
         document.getElementById('btn-tracker').classList.remove('border-blue-600', 'text-blue-600');
         document.getElementById('btn-docs').classList.remove('border-blue-600', 'text-blue-600');
         document.getElementById('btn-tracker').classList.add('border-transparent', 'text-slate-600');
         document.getElementById('btn-docs').classList.add('border-transparent', 'text-slate-600');
 
-        // Show active tab
         document.getElementById(`tab-${tabName}`).classList.remove('hidden');
         document.getElementById(`btn-${tabName}`).classList.add('border-blue-600', 'text-blue-600');
         document.getElementById(`btn-${tabName}`).classList.remove('border-transparent', 'text-slate-600');
